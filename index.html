@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Zigboard</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<style type="text/css">
+
+    @import url('https://fonts.googleapis.com/css?family=Do+Hyeon');
+
+    body {
+      background-color: #238bd2;
+      font-family: 'Do Hyeon', sans-serif;  
+    }
+
+    .sound-link-container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .heading {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .zig {
+      transform: scale(.8);
+    }
+
+    h1 {
+      /*text-transform: uppercase;*/
+    }
+
+		.sound-link {
+      background-color: #23d2c2;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      height: 150px;
+      color: #000;
+      cursor: pointer;
+      transition: background-color .2s ease-out;
+      width: calc(25% - 15px);
+      margin: 0 15px 15px 0;
+      margin-right: 15px;
+      font-weight: 100;
+      font-size: 20px;
+      border-radius: 2px;
+    }
+
+    .sound-link p {
+      width: 100%;
+      text-align: center;
+    }
+
+    .sound-link:hover {
+      color: #000;
+      text-decoration: none;
+      background-color: #17afa2;
+    }
+
+    @media(max-width: 768px){
+      .sound-link {
+        width: calc(50% - 15px);
+      }
+    }
+
+    @media(max-width: 450px){
+      .sound-link {
+        width: 100%;
+        margin: 10px 20px;
+      }
+    }
+	</style>
+
+</head>
+<body>
+	<div class="container">
+    <div class="row">
+      <div class="heading">
+        <h1>Zigboard</h1>
+        <img class="zig" src="/img/zig.png"/>
+      </div>
+		  <div class="sound-link-container"></div>  
+    </div>
+	</div>
+</body>
+
+	<script
+	  src="https://code.jquery.com/jquery-3.3.1.min.js"
+	  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	  crossorigin="anonymous"></script>
+
+	  <script type="text/javascript">
+
+  		var soundLinks = [
+  			{
+  				"name": "Aw, C'mon!", 
+  				"file": "aw-cmon",
+  			},
+  			{
+  				"name": "Daaaaamn!", 
+  				"file": "daaaaamn",
+  			},
+  			{
+  				"name": "Eh! 1", 
+  				"file": "eh-1",
+  			},
+  			{
+  				"name": "Eh! 2", 
+  				"file": "eh-2",
+  			},
+  			{
+  				"name": "Eh! 3", 
+  				"file": "eh-3",
+  			},
+  			{
+  				"name": "Excited", 
+  				"file": "excitement",
+  			},
+  			{
+  				"name": "GG", 
+  				"file": "gg",
+  			},
+  			{
+  				"name": "Grunt 1", 
+  				"file": "grunt-1",
+  			},
+  			{
+  				"name": "Grunt 2", 
+  				"file": "grunt-2",
+  			},
+  			{
+  				"name": "Grunt 3", 
+  				"file": "grunt-3",
+  			},
+  			{
+  				"name": "Grunt 4", 
+  				"file": "grunt-4",
+  			},
+  			{
+  				"name": "Grunt 5", 
+  				"file": "grunt-5",
+  			},
+  			{
+  				"name": "Grunt 6", 
+  				"file": "grunt-6",
+  			},
+  			{
+  				"name": "Grunt 7", 
+  				"file": "grunt-7",
+  			},
+  			{
+  				"name": "Hurt", 
+  				"file": "hurt",
+  			},
+  			{
+  				"name": "Nooooo!", 
+  				"file": "nooooo",
+  			},
+  			{
+  				"name": "Ohhhhh!", 
+  				"file": "ohhhhh",
+  			},
+  			{
+  				"name": "Sigh 1", 
+  				"file": "sigh-1",
+  			},
+  			{
+  				"name": "Sigh 2", 
+  				"file": "sigh-2",
+  			},
+  			{
+  				"name": "Uhhhhh!", 
+  				"file": "uhhhhh",
+  			},
+  		]
+
+  		function createSoundLink(name, link){
+				var fullLink = '/mp3/' + link + '.mp3';
+				var soundLinkHTML = '<a class="sound-link" data-link="' + fullLink + '"><p>' + name + '</p></a>';
+				$('.sound-link-container').append(soundLinkHTML);
+			};
+
+      function playAudio(audioSrc) {
+        var audioElement = document.createElement('audio');
+        audioElement.setAttribute('src', audioSrc);
+        audioElement.play();
+      }
+  		
+  		$(document).on("click", ".sound-link", function(e){
+  			e.preventDefault();
+        // console.log($(this));
+        var audioLink = $(this).data('link');
+        console.log(audioLink);
+        playAudio(audioLink);
+  		});
+
+  		$(document).ready(function(){
+  			$.each(soundLinks, function(k,v){
+  				createSoundLink(v.name, v.file);
+  			});
+  		});
+	  </script>
+</html>
